@@ -1,0 +1,24 @@
+{
+  "name": "bse-api-package",
+  "version": "1.0.0",
+  "description": "A Node.js package to fetch data from the Bombay Stock Exchange (BSE).",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "BSE",
+    "Bombay Stock Exchange",
+    "stock",
+    "finance",
+    "api"
+  ],
+  "author": "RK",
+  "license": "MIT",
+  "dependencies": {
+    "adm-zip": "^0.5.14",
+    "axios": "^0.21.4",
+    "date-fns": "^2.22.1",
+    "fs": "^0.0.1-security"
+  }
+}
