@@ -44,6 +44,22 @@ downloader.downloadTodayData(outputDir)
   });
 
 ```
+### Download and Extract specific date Data
+
+```bash
+
+const outputDir = '/path/to/your/output/directory';
+const date =new Date('2023-05-27');
+
+downloader.downloadForDate(date, outputDir)
+  .then(success => {
+    if (success) {
+      console.log('Downloaded and extracted ZIP for today');
+    } else {
+      console.log('Failed to download or extract ZIP for today');
+    }
+  });
+```
 ### Download Data for a Date Range
 
 ```bash
@@ -70,6 +86,11 @@ downloader.downloadDataForDateRange(startDate, endDate, outputDir)
 
 `downloadTodayData(outputDir: string): Promise<boolean>`
 Downloads and extracts the Bhavcopy ZIP file for today's date.
+
+- `outputDir`: The directory path where the extracted files will be saved.
+
+`downloadForDate(date: Date,outputDir: string): Promise<boolean>`
+Downloads and extracts the Bhavcopy ZIP file for given date.
 
 - `outputDir`: The directory path where the extracted files will be saved.
 
