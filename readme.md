@@ -1,20 +1,20 @@
-# BSE-API-DOWNLOADER
+# BSE-API-PACKAGE
 
-BSE-API-DOWNLOADER is a Node.js library that facilitates downloading and extracting ZIP files containing Bhavcopy (trading data) from the Bombay Stock Exchange (BSE) website.
+BSE-API-PACKAGE is a Node.js library that facilitates downloading and extracting ZIP files containing Bhavcopy (trading data) from the Bombay Stock Exchange (BSE) website.
 
 ## Installation
 
 Install the package via npm:
 
 ```bash
-npm install bse-downloader
+npm install bse-api-package
 ```
 
 ## Features
 
--Download and extract ZIP files containing Bhavcopy data from BSE for a specific date or date range.
--Retrieve today's Bhavcopy data directly.
--Save extracted files to a specified output directory.
+-  Download and extract ZIP files containing Bhavcopy data from BSE for a specific date or date range.
+-  Retrieve today's Bhavcopy data directly.
+-  Save extracted files to a specified output directory.
 
 ## Usage
 ### Importing the Module
