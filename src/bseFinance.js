@@ -15,24 +15,26 @@ class BSEDownloader {
     const zipUrl = `${this.baseURL}/download/BhavCopy/Equity/${zipFileName}`;
     const zipFilePath = path.join(outputDir, zipFileName);
 
-    try {
-      // Ensure the output directory exists
-      if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir, { recursive: true });
-        console.log(`Created directory: ${outputDir}`);
-      }
+    // Ensure the output directory exists
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+      console.log(`Created directory: ${outputDir}`);
+    }
 
+    try {
       // Download the ZIP file
       await this.downloadFile(zipUrl, zipFilePath);
 
       // Extract the ZIP file contents
       await this.extractZIP(zipFilePath, outputDir);
 
-      console.log(`ZIP file extracted to: ${outputDir}`);
+      console.log(`ZIP file for ${formattedDate} downloaded and extracted to: ${outputDir}`);
+      return true;
     } catch (error) {
       console.error(`Error downloading or extracting ZIP file for date ${date}: ${error.message}`);
       // Ensure the ZIP file is deleted if the download or extraction fails
       this.deleteFile(zipFilePath);
+      return false;
     }
   }
 
@@ -54,6 +56,7 @@ class BSEDownloader {
     try {
       const zip = new AdmZip(zipFilePath);
       zip.extractAllTo(outputDir, true);
+      console.log(`ZIP file extracted to: ${outputDir}`);
     } catch (error) {
       throw new Error(`Error extracting ZIP file ${zipFilePath}: ${error.message}`);
     }
@@ -72,7 +75,10 @@ class BSEDownloader {
       const endDay = new Date(endDate);
 
       while (currentDay <= endDay) {
-        await this.downloadForDate(currentDay, outputDir);
+        const success = await this.downloadForDate(currentDay, outputDir);
+        if (!success) {
+          console.log(`Failed to download or extract ZIP for Date ${format(currentDay, 'yyyy-MM-dd')}`);
+        }
         currentDay = addDays(currentDay, 1);
       }
 
@@ -86,9 +92,11 @@ class BSEDownloader {
   async downloadTodayData(outputDir) {
     try {
       const today = new Date();
-      await this.downloadAndExtractZIP(today, outputDir);
-      console.log(`Downloaded and extracted ZIP for today: ${format(today, 'yyyy-MM-dd')}`);
-      return true;
+      const success = await this.downloadForDate(today, outputDir);
+      if (!success) {
+        console.log(`Failed to download or extract ZIP for today: ${format(today, 'yyyy-MM-dd')}`);
+      }
+      return success;
     } catch (error) {
       console.error(`Error downloading or extracting ZIP file for today: ${error.message}`);
       return false;

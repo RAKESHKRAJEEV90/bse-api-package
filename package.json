@@ -1,6 +1,6 @@
 {
   "name": "bse-api-package",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Node.js package to fetch data from the Bombay Stock Exchange (BSE).",
   "main": "src/index.js",
   "scripts": {
